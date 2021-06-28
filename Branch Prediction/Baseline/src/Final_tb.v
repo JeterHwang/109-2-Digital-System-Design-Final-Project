@@ -1,14 +1,7 @@
-// this is a test bench feeds initial instruction and data
-// the processor output is not verified
-
 `timescale 1 ns/10 ps
-
-`define CYCLE 10 // You can modify your clock frequency
-
+`define CYCLE 10 
 `define DMEM_INIT "D_mem"
-`define SDFFILE   "./CHIP_syn.sdf"	// Modify your SDF file name
 
-// For different condition (I_mem, TestBed)
 `ifdef noHazard
     `define IMEM_INIT "I_mem_noHazard"
     `include "./TestBed_noHazard.v"
@@ -18,30 +11,37 @@
 	`include "./TestBed_hasHazard.v"
 `endif	
 `ifdef BrPred
-	`define IMEM_INIT "../../Extension/BrPred/a10b20c30/I_mem_BrPred"
-	`include "../../Extension/BrPred/a10b20c30/TestBed_BrPred.v"
+	`define IMEM_INIT "../../BrPred/a10b20c30/I_mem_BrPred"
+	`include "../../BrPred/a10b20c30/TestBed_BrPred.v"
 `endif
 `ifdef mergesort 
 	`define IMEM_INIT "I_mem_mergeSort"
 	`include "./TestBed_mergeSort.v"
 `endif
+
 `ifdef noBP
-	`include "./ALUPipeline2/RISCV_pipeline.v"
+	`include "./ALUPipeline_noBP/RISCV_pipeline.v"
+	`define SDFFILE "./syn/noBP_syn.sdf"
 `elsif lv1hash
-	`include "./ALUPipeline/RISCV_pipeline.v"
-	`include "./Cache/1_level_hash.v"
-`elsif lv1
-	`include "./ALUPipeline/RISCV_pipeline.v"
-	`include "./Cache/1_level.v"
+	`include "./ALUPipeline_BP/RISCV_pipeline.v"
+	`include "./BPscheme/1_level_hash.v"
+	`define SDFFILE "./syn/lv1hash_syn.sdf"
+`elsif lv1cach
+	`include "./ALUPipeline_BP/RISCV_pipeline.v"
+	`include "./BPscheme/1_level.v"
+	`define SDFFILE "./syn/lv1cach_syn.sdf"
 `elsif lv2glo
-	`include "./ALUPipeline/RISCV_pipeline.v"
-	`include "./Cache/2_level_global.v"
+	`include "./ALUPipeline_BP/RISCV_pipeline.v"
+	`include "./BPscheme/2_level_global.v"
+	`define SDFFILE "./syn/lv2glo_syn.sdf"
 `elsif lv2loc
-	`include "./ALUPipeline/RISCV_pipeline.v"
-	`include "./Cache/2_level_local.v"
+	`include "./ALUPipeline_BP/RISCV_pipeline.v"
+	`include "./BPscheme/2_level_local.v"
+	`define SDFFILE "./syn/lv2loc_syn.sdf"
 `else
-	`include "./ALUPipeline/RISCV_pipeline.v"
-	`include "./Cache/1_level.v"
+	`include "./ALUPipeline_BP/RISCV_pipeline.v"
+	`include "./BPscheme/1_level.v"
+	`define SDFFILE "./syn/lv1cach_syn.sdf"
 `endif
 module Final_tb;
 
