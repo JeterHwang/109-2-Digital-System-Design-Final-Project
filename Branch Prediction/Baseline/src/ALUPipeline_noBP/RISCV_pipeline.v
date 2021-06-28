@@ -1,8 +1,8 @@
-`include "./ALUPipeline2/Pipeline_stage1.v"
-`include "./ALUPipeline2/Pipeline_stage2.v"
-`include "./ALUPipeline2/Pipeline_stage3.v"
-`include "./ALUPipeline2/Pipeline_stage4.v"
-`include "./ALUPipeline2/Pipeline_stage5.v"
+`include "./ALUPipeline_noBP/Pipeline_stage1.v"
+`include "./ALUPipeline_noBP/Pipeline_stage2.v"
+`include "./ALUPipeline_noBP/Pipeline_stage3.v"
+`include "./ALUPipeline_noBP/Pipeline_stage4.v"
+`include "./ALUPipeline_noBP/Pipeline_stage5.v"
 
 module RISCV_Pipeline(
     input clk,

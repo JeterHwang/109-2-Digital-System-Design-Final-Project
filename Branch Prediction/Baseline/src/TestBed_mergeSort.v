@@ -122,7 +122,7 @@ module	TestBed(
 			end
 			$display("\n=========================== Performance Metric =============================\n");
 			$display("Memory stall rate : %d (stalled) / %d (cycles) = %f%% \n", stall_cycles, duration, stall_cycles * 100.0 / duration );
-			$display("       Flush rste : %d (flushed) / %d (instructions) = %f%% \n",flush_times, instruction_count_r, flush_times * 100.0 / instruction_count_r);
+			$display("       Flush rate : %d (flushed) / %d (instructions) = %f%% \n",flush_times, instruction_count_r, flush_times * 100.0 / instruction_count_r);
 			$display("        Miss rate : %d (flushed) / %d (branch inst) = %f%% \n",flush_times, branch_count, flush_times * 100.0 / branch_count);
 			$display("============================================================================\n");
 			if (error_num) begin 
